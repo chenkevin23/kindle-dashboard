@@ -1,0 +1,10 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "python -m src.main --push"
+# Run at 6:30 AM, 12:00 PM, 6:00 PM Pacific (UTC-7 in PDT)
+# Adjusted to UTC: 13:30, 19:00, 01:00
+cronSchedule = "30 13 * * *"
+restartPolicyType = "NEVER"

@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kindle-dashboard"
+version = "0.1.0"
+description = "E-ink dashboard for Kindle PW3 — integrates with OpenClaw/Luka"
+requires-python = ">=3.11"
+dependencies = [
+    "Jinja2>=3.1",
+    "playwright>=1.50",
+    "Pillow>=11.0",
+    "feedparser>=6.0",
+    "paramiko>=3.5",
+    "scp>=0.15",
+    "boto3>=1.36",
+    "pydantic-settings>=2.7",
+    "python-dateutil>=2.9",
+]
+
+[project.scripts]
+kindle-dashboard = "src.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]

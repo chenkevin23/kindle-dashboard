@@ -45,7 +45,7 @@ class Settings(BaseSettings):
     screen_height: int = 1448
     max_emails: int = 5
     max_events: int = 8
-    max_news: int = 6
+    max_news: int = 8
 
     # ── Todoist ──
     todoist_api_token: str = ""   # or auto-reads from ~/.config/todoist/api_token

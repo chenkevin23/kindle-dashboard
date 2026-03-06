@@ -47,6 +47,9 @@ class Settings(BaseSettings):
     max_events: int = 8
     max_news: int = 6
 
+    # ── Todoist ──
+    todoist_api_token: str = ""   # or auto-reads from ~/.config/todoist/api_token
+
     # ── Weather ──
     weather_lat: float = 47.61    # Seattle / Bellevue
     weather_lon: float = -122.33

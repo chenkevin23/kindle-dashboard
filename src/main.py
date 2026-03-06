@@ -68,7 +68,7 @@ def _build_context(args: argparse.Namespace) -> dict:
     from src.fetchers.weather import fetch_weather
     weather = fetch_weather()
 
-    # ── Static tasks (placeholder — Luka can inject via --tasks-json) ──
+    # ── Tasks: Todoist first, fall back to --tasks-json ──
     tasks: list[TaskItem] = []
     if args.tasks_json:
         import json
@@ -77,6 +77,12 @@ def _build_context(args: argparse.Namespace) -> dict:
             tasks = [TaskItem(title=t.get("title", ""), done=t.get("done", False)) for t in raw_tasks]
         except json.JSONDecodeError:
             logger.warning("Invalid --tasks-json, ignoring")
+
+    if not tasks:
+        logger.info("Fetching tasks from Todoist…")
+        from src.fetchers.todoist import fetch_todoist
+        todoist_tasks = fetch_todoist()
+        tasks = [TaskItem(title=t.title, done=t.done) for t in todoist_tasks]
 
     tasks_done = sum(1 for t in tasks if t.done)
 

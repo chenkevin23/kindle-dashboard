@@ -7,3 +7,4 @@ scp==0.15.0
 boto3==1.36.0
 pydantic-settings==2.7.1
 python-dateutil==2.9.0.post0
+todoist-api-python==3.2.1

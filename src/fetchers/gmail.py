@@ -31,13 +31,17 @@ def _run_gog(args: list[str], timeout: int = 15) -> str | None:
     if settings.gog_account:
         cmd.extend(["--account", settings.gog_account])
 
+    import os
+    env = os.environ.copy()
+    env["PATH"] = "/opt/homebrew/bin:/usr/local/bin:" + env.get("PATH", "")
+
     try:
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
             timeout=timeout,
-            env={"PATH": "/opt/homebrew/bin:/usr/bin:/bin"},
+            env=env,
         )
         if result.returncode != 0:
             logger.error(f"gog failed: {result.stderr.strip()}")
